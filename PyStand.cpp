@@ -158,10 +158,15 @@ bool PyStand::CheckEnviron(const wchar_t *rtp)
 		return false;
 	}
 
+	std::wstring python_path_env = _home + L"\\site-packages;" + _runtime;
+
 	// setup environment
 	SetEnvironmentVariableW(L"PYSTAND", _pystand.c_str());
 	SetEnvironmentVariableW(L"PYSTAND_HOME", _home.c_str());
 	SetEnvironmentVariableW(L"PYSTAND_RUNTIME", _runtime.c_str());
+  
+	SetEnvironmentVariableW(L"PYTHONHOME", _runtime.c_str());
+	SetEnvironmentVariableW(L"PYTHONPATH", python_path_env.c_str());
 
 	// unnecessary to init PYSTAND_SCRIPT here.
 #if 0
